@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<!-- This file is part of Coog. The COPYRIGHT file at the top level of     this repository contains the full copyright notices and license terms. -->
+
+<tryton>
+    <data>
+        <!-- ################ -->
+        <!-- # Redefinition # -->
+        <!-- ################ -->
+        <record model="ir.ui.view" id="library_view_form">
+            <field name="model">library.book</field>
+            <field name="inherit" ref="library.library_view_form"/>
+            <field name="name">book_form</field>
+        </record>
+        <record model="ir.ui.view" id="library_view_tree">
+            <field name="model">library.book</field>
+            <field name="inherit" ref="library.library_view_tree"/>
+            <field name="name">book_tree</field>
+        </record>
+        <record model="ir.action.act_window.domain" id="act_library_book_all">
+            <field name="name">All</field>
+            <field name="sequence" eval="40"/>
+            <field name="act_window"  ref="library.act_library_window" />
+        </record>
+        <record model="ir.action.act_window.domain" id="act_library_book_return">
+            <field name="name">Available</field>
+            <field name="sequence" eval="20"/>
+            <field name="domain" eval="[('left',  '!=', 0)]" pyson="1"/>
+            <field name="act_window"  ref="library.act_library_window" />
+        </record>
+        <record model="ir.action.act_window.domain" id="act_library_book_borrow">
+            <field name="name">Unavailable</field>
+            <field name="sequence" eval="30"/>
+            <field name="domain" eval="[('left',  '=', 0)]" pyson="1"/>
+            <field name="act_window"  ref="library.act_library_window" />
+        </record>
+        <!-- ################## -->
+        <!-- # Implementation # -->
+        <!-- ################## -->
+        <!-- ########## -->
+        <!-- # Renter # -->
+        <!-- ########## -->
+    	<record model="ir.action.act_window" id="act_renter_window">
+            <field name="name">Renter</field>
+            <field name="res_model">party.party</field>
+        </record>
+        <record model="ir.ui.view" id="library_renter_view_tree">
+            <field name="model">party.party</field>
+            <field name="type">tree</field>x
+            <field name="name">user_tree</field>
+        </record>
+        <record model="ir.ui.view" id="library_renter_view_form">
+            <field name="model">party.party</field>
+            <field name="type">form</field>
+            <field name="name">user_form</field>
+        </record>
+        <record model="ir.action.act_window.domain" id="act_library_renter_all">
+            <field name="name">All</field>
+            <field name="sequence" eval="40"/>
+            <field name="act_window"  ref="act_renter_window" />
+        </record>
+        <record model="ir.action.act_window.domain" id="act_library_renter_return">
+            <field name="name">Allowed</field>
+            <field name="sequence" eval="20"/>
+            <field name="domain" eval="[('late',  '!=', 4)]" pyson="1"/>
+            <field name="act_window"  ref="act_renter_window" />
+        </record>
+        <record model="ir.action.act_window.domain" id="act_library_renter_borrow">
+            <field name="name">Banned</field>
+            <field name="sequence" eval="30"/>
+            <field name="domain" eval="[('late',  '=', 4)]" pyson="1"/>
+            <field name="act_window"  ref="act_renter_window" />
+        </record>
+        <record model="ir.action.act_window.view" id="act_library_renter_view1">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="library_renter_view_form"/>
+            <field name="act_window" ref="act_renter_window"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_library_renter_view2">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="library_renter_view_tree"/>
+            <field name="act_window" ref="act_renter_window"/>
+        </record>
+        <!-- ######## -->
+        <!-- # Rent # -->
+        <!-- ######## -->
+        <record model="ir.action.act_window" id="act_rent_window">
+            <field name="name">Rent</field>
+            <field name="res_model">library.rent</field>
+        </record>
+        <record model="ir.ui.view" id="library_rent_view_tree">
+            <field name="model">library.rent</field>
+            <field name="type">tree</field>
+            <field name="name">rent_tree</field>
+        </record>
+        <record model="ir.ui.view" id="library_rent_view_form">
+            <field name="model">library.rent</field>
+            <field name="type">form</field>
+            <field name="name">rent_form</field>
+        </record>
+        <record model="ir.action.act_window.domain" id="act_library_rent_all">
+            <field name="name">All</field>
+            <field name="sequence" eval="40"/>
+            <field name="act_window"  ref="act_rent_window" />
+        </record>
+        <record model="ir.action.act_window.domain" id="act_library_rent_return">
+            <field name="name">Returned</field>
+            <field name="sequence" eval="20"/>
+            <field name="domain" eval="[('rendered',  '!=', None)]" pyson="1"/>
+            <field name="act_window"  ref="act_rent_window" />
+        </record>
+        <record model="ir.action.act_window.domain" id="act_library_rent_borrow">
+            <field name="name">Borrowed</field>
+            <field name="sequence" eval="30"/>
+            <field name="domain" eval="[('rendered',  '=', None)]" pyson="1"/>
+            <field name="act_window"  ref="act_rent_window" />
+        </record>
+        <record model="ir.action.act_window.view" id="act_library_rent_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="library_rent_view_tree"/> 
+            <field name="act_window" ref="act_rent_window"/>
+        </record>
+        <menuitem name="Rent" parent="library.menu_library" id="menu_rents" action="act_rent_window"/>
+    	<menuitem name="Renter" parent="library.menu_library" id="menu_renters" action="act_renter_window"/>
+    </data>
+</tryton>
