@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!-- This file is part of Coog. The COPYRIGHT file at the top level of     this repository contains the full copyright notices and license terms. -->
+
+<tryton>
+    <data>
+    	<record model="ir.action.act_window" id="act_library_window">
+            <field name="name">Books</field>
+            <field name="res_model">library.book</field>
+        </record>
+        <record model="ir.ui.view" id="library_view_tree">
+            <field name="model">library.book</field>
+            <field name="type">tree</field>
+            <field name="name">book_tree</field>
+        </record>
+        <record model="ir.ui.view" id="library_view_form">
+            <field name="model">library.book</field>
+            <field name="type">form</field>
+            <field name="name">book_form</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_library_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="library_view_tree"/>
+            <field name="act_window" ref="act_library_window"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_library_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="library_view_form"/>
+            <field name="act_window" ref="act_library_window"/>
+        </record>
+    	<menuitem name="Library" id="menu_library" sequence="0"/>
+    	<menuitem name="Books" parent="menu_library" id="menu_books" action="act_library_window"/>
+    </data>
+</tryton>
