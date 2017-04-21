@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+ <!-- This file is part of Tryton.  The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<form col="8">
+    <label name="title"/>
+    <field name="title" colspan="1"/>
+    <label name="isbn"/>
+    <field name="isbn" colspan="1"/>
+    <label name="subject"/>
+    <field name="subject" colspan="1"/>
+    <label name="abstract"/>
+    <field name="abstract" yfill="0"/>
+</form>

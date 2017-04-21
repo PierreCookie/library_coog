@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!-- This file is part of Coog. The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+    	<!-- ############### -->
+        <!-- # Wizard rend # -->
+        <!-- ############### -->
+        <record model="ir.action.wizard" id="library_rent_wizard">
+            <field name="name">Rend</field>
+            <field name="wiz_name">library.rend_do</field>
+        </record>
+        <record model="ir.ui.view" id="library_rend_view_form">
+            <field name="model">library.user_do_rent.start</field>
+            <field name="type">form</field>
+            <field name="name">rend_form</field>
+        </record>
+        <!-- #################### -->
+        <!-- # Wizard user rent # -->
+        <!-- #################### -->
+        <record model="ir.action.wizard" id="library_rent_user_wizard">
+            <field name="name">Rent</field>
+            <field name="wiz_name">library.user_do_rent</field>
+        </record>
+        <!-- ############# -->
+        <!-- # Reporting # -->
+        <!-- ############# -->
+        <record model="ir.action.report" id="report_library">
+            <field name="name">Book</field>
+            <field name="model">library.book</field>
+            <field name="report_name">library.book</field>
+            <field name="report">library/book.odt</field>
+        </record>
+        <record model="ir.action.wizard" id="book_print">
+            <field name="name">Print Library</field>
+            <field name="wiz_name">library.print_report</field>
+        </record>
+        <record model="ir.ui.view" id="print_view_form">
+            <field name="model">library.print_report.start</field>
+            <field name="type">form</field>
+            <field name="name">report_start_form</field>
+        </record>
+        <record model="ir.action.keyword" id="report_library_book">
+            <field name="keyword">form_print</field>
+            <field name="model">library.book,-1</field>
+            <field name="action" ref="report_library"/>
+        </record>
+    </data>
+</tryton>
